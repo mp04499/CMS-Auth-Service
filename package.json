@@ -1,0 +1,48 @@
+{
+  "name": "auth-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@types/cookie-parser": "^1.4.2",
+    "@types/jsonwebtoken": "^8.3.5",
+    "apollo-server": "^2.9.9",
+    "apollo-server-core": "^2.9.9",
+    "argon2": "^0.25.1",
+    "cookie-parser": "^1.4.4",
+    "express": "^5.0.0-alpha.7",
+    "graphql": "^14.5.8",
+    "jsonwebtoken": "^8.5.1",
+    "nexus": "^0.12.0-beta.14",
+    "nexus-prisma": "^0.5.2"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.7.0",
+    "@typescript-eslint/parser": "^2.7.0",
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.6.0",
+    "eslint-import-resolver-typescript": "^2.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "@types/faker": "^4.1.7",
+    "@types/ws": "^6.0.3",
+    "faker": "^4.1.0",
+    "prettier": "^1.19.1",
+    "prisma2": "^2.0.0-preview016",
+    "ts-node": "^8.5.2",
+    "ts-node-dev": "^1.0.0-pre.41",
+    "typescript": "^3.7"
+  },
+  "scripts": {
+    "start": "node dist",
+    "clean": "rm -rf dist",
+    "build": "npm -s run clean && npm -s run generate && tsc",
+    "generate": "npm -s run generate:prisma && npm -s run generate:nexus",
+    "generate:prisma": "prisma2 generate",
+    "generate:nexus": "NODE_ENV=development ts-node --transpile-only src/graphql/schema",
+    "dev": "ts-node-dev --tree-kill --no-notify --respawn --transpile-only src/index",
+    "seed": "ts-node prisma/seed"
+  },
+  "author": "Michael Powell",
+  "license": "ISC"
+}
