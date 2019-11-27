@@ -9,11 +9,11 @@ interface Token {
 const secretKey = '123';
 
 export const authenticate = (context: Context): void | Token | string => {
-	const Authentication = context.req.get('Authorization');
+	const Authentication: string = context.req.get('Authorization');
 
 	if (Authentication) {
 		try {
-			const token = Authentication.replace('Bearer ', '');
+			const token = Authentication.replace('Bearer: ', '');
 			const verifiedToken = verify(token, secretKey) as Token;
 			return verifiedToken && verifiedToken.userId;
 		} catch (error) {

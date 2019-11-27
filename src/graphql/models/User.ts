@@ -1,13 +1,15 @@
-import { objectType } from 'nexus';
+import { User } from '@generated/photon';
+import { TypeInfo } from 'graphql';
+import { Context } from '../context';
 
-export const User = objectType({
-	name: 'User',
-	definition: (t) => {
-		t.model.id()
-		t.model.displayName()
-		t.model.email()
-		t.model.role()
+const UserDef: { [argName: string]: any; } = {
+	__resolveReference: async (user: User, args: any, context: Context, info?: TypeInfo): Promise<User> => {
+		return context.photon.users.findOne({
+			where: {
+				id: user.id,
+			},
+		});
 	}
-})
+}
 
-export default User;
+export default UserDef;

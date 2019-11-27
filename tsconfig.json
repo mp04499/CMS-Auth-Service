@@ -10,5 +10,9 @@
   },
   "include": [
     "src/**/*"
+  ],
+  "exclude": [
+    "apollo.config.js",
+    "prisma"
   ]
 }
